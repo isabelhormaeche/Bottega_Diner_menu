@@ -1,4 +1,4 @@
-// BOTTEGA DINER MENU
+// BOTTEGA DINER 
 
 const bottegaMenu = {
     breakfast:{
