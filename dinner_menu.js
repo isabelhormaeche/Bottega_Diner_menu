@@ -86,16 +86,16 @@ function showMenu(typeMenu) {
   
     let printMenu = `Our ${typeMenu.toUpperCase()} menu includes: (1) main course, (1) side and (1) drink of your choice. Free coffee/tea is included.\n`;
     printMenu += ".............................................................................\n";    
-    printMenu += "MAIN COURSE (select ONE):\n"; 
+    printMenu += "MAIN COURSE :\n"; 
     mainCourses.forEach((item, index) => {
     printMenu += `${index + 1}. ${item} - €${bottegaMenu[typeMenu].mainCourses[item]}\n`;
     });
-    printMenu += "\nSIDES (select TWO):\n";
+    printMenu += "\nSIDES :\n";
     printMenu += ".............................................................................\n";
     sideDishes.forEach((item, index) => {
       printMenu += `${index + 1}. ${item} - €${bottegaMenu[typeMenu].sideDishes[item]}\n`;
     });
-    printMenu += "\nBEVERAGES (select ONE):\n";
+    printMenu += "\nBEVERAGES :\n";
     printMenu += ".............................................................................\n";
     beverages.forEach((item, index) => {
     printMenu += `${index + 1}. ${item} - €${bottegaMenu[typeMenu].beverages[item]}\n`;
@@ -123,8 +123,7 @@ function getTotalPrice(mainCourse, sideDishOne, beverage, typeMenu) {
 
 function orderMainCourse(typeMenu) {
     const mainCourses = Object.keys(bottegaMenu[typeMenu].mainCourses);
-    let order = prompt("Please select (ONE) main course: enter the dish number:\n" + mainCourses.map((item, index) => `${index + 1}. ${item}`).join("\n")).toLowerCase(); 
-  
+    let order = prompt("Please select (ONE) main course: enter the dish number:\n" + mainCourses.map((item, index) => `${index + 1}. ${item} ($${bottegaMenu[typeMenu].mainCourses[item]})`).join("\n")).toLowerCase(); 
     // Check if order is a number
     if (!isNaN(order)) {
         const index = parseInt(order) - 1;
@@ -147,13 +146,12 @@ function orderMainCourse(typeMenu) {
 
 function ordersideDishOne(typeMenu) {
     const sideDishes = Object.keys(bottegaMenu[typeMenu].sideDishes);
-    let order = prompt("Remember you have (2) sides included. Please select your FIRST SIDE dish: entering the dish number:\n" + sideDishes.map((item, index) => `${index + 1}. ${item}`).join("\n")).toLowerCase(); 
-  
+    let order = prompt("Please select (ONE) SIDE dish: entering the dish number:\n" + sideDishes.map((item, index) => `${index + 1}. ${item} ($${bottegaMenu[typeMenu].sideDishes[item]})`).join("\n")).toLowerCase(); 
     // Check if order is a number
     if (!isNaN(order)) {
       const index = parseInt(order) - 1;
       if (index >= 0 && index < sideDishes.length) {
-        alert("Perfect! You chose your first side dish.");
+        alert("Perfect choice!");
         return sideDishes[index];
       }
     }
@@ -167,12 +165,12 @@ function ordersideDishOne(typeMenu) {
     return order;
   }
 
-  // Function to order BEVERAGE:
+// Function to order BEVERAGE:
 
 function orderBeverage(typeMenu) {
   const beverages = Object.keys(bottegaMenu[typeMenu].beverages);
-  let order = prompt("Apart from coffee and tea which are free included, what would you like to drink? Please select your beverage entering the drink number:\n" + beverages.map((item, index) => `${index + 1}. ${item}`).join("\n")).toLowerCase(); 
-
+  let order = prompt("Apart from coffee and tea which are free included, what would you like to drink? Please select your beverage entering the drink number:\n" + beverages.map((item, index) => `${index + 1}. ${item}($${bottegaMenu[typeMenu].beverages[item]})`).join("\n")).toLowerCase();
+  
   // Check if order is a number
   if (!isNaN(order)) {
     const index = parseInt(order) - 1;
@@ -187,6 +185,7 @@ function orderBeverage(typeMenu) {
     alert("That option is not in the menu. Please, try again. Enter only the dish number (e.g.:  8. dishname, enter -->  8 ).");
     return orderBeverage(typeMenu); // Ask to select again!!!
   }
+
   return order;
 }
 
